@@ -1,0 +1,215 @@
+<!-- This website is only for Styling (Frontend) delete it-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dummy For Assignment 2</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex flex-col h-none  ">
+        <!-- Search Bar -->
+        <div class="bg-blue-600 p-4 h-24 text-white flex justify-between items-center sticky top-0 z-10 w-full">
+            <h1 class="text-2xl font-bold w-2/12 mr-10">Game Listing</h1>
+            <input type="text" placeholder="Search games..." class="p-2 rounded-md text-black w-10/12" />
+        </div>
+        <!-- End Search Bar -->
+
+        <div class="flex flex-1">
+            <!-- Sidebar -->
+            <div class="bg-gray-200 p-4 w-1/6 h-full fixed ">
+                <h2 class="text-lg font-bold mb-4">Genres</h2>
+                <ul>
+                    <li class="cursor-pointer mb-2 px-2 py-1 rounded-md text-sm hover:bg-blue-300 hover:text-white transition duration-200">Action</li>
+                    <li class="cursor-pointer mb-2 px-2 py-1 rounded-md text-sm hover:bg-blue-300 hover:text-white transition duration-200">Adventure</li>
+                    <li class="cursor-pointer mb-2 px-2 py-1 rounded-md text-sm hover:bg-blue-300 hover:text-white transition duration-200">RPG</li>
+                </ul>
+            </div>
+            <!-- End Sidebar -->
+
+            <!-- Main Section -->
+            <div class="w-5/6 ml-64 right-0 overflow-y-scroll bg-white px-4">
+                <!-- Filters with Sticky Position -->
+                <div class="fixed w-5/6 right-0 bg-white z-20 px-4 h-28">
+                    <div class="flex justify-between">
+                        <!-- Two Drop Down -->
+                        <div class="flex flex-col items-center">
+                            <label class="mb-2">Filter 1</label>
+                            <select class="p-2 border border-gray-300 rounded">
+                                <option value="Option1">Option 1</option>
+                                <option value="Option2">Option 2</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <label class="mb-2">Filter 2</label>
+                            <select class="p-2 border border-gray-300 rounded">
+                                <option value="Option1">Option 1</option>
+                                <option value="Option2">Option 2</option>
+                            </select>
+                        </div>
+                        <!-- End Drop Down -->
+                    </div>
+                </div>
+                <!-- End Filters -->
+
+                <!-- Game Cards -->
+                <div class="grid grid-cols-3 gap-4 p-4 pt-28">
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                    <div class="bg-white shadow-md rounded-lg p-4 m-4">
+                        <h3 class="text-xl font-bold">Game Title</h3>
+                        <p>Platform: PC</p>
+                        <p>Score: 9.5</p>
+                        <p>Genre: RPG</p>
+                        <p>Editor's Choice: <span class="text-green-500">Yes</span></p>
+                    </div>
+                    <!-- Repeat more cards as needed -->
+                </div>
+            </div>
+            <!-- End Main Section -->
+        </div>
+    </div>
+</body>
+</html>

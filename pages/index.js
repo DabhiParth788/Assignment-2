@@ -1,114 +1,118 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import { useState, useEffect } from "react";
+import SearchBar from "../components/SearchBar";
+import Sidebar from "../components/Sidebar";
+import GameCard from "../components/GameCard";
+import Dropdown from "../components/Dropdown";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const Home = () => {
+  const [games, setGames] = useState([]);
+  const [filteredGames, setFilteredGames] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState("All Genres");
+  const [selectedPlatform, setSelectedPlatform] = useState("All Platforms");
+  const [sortOrder, setSortOrder] = useState("");
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+  const [platforms, setPlatforms] = useState([]);
+  const [genres, setGenres] = useState([]);
 
-export default function Home() {
+  const sortOptions = ["Sort by Score (Low to High)", "Sort by Score (High to Low)"];
+
+  // Fetch game data from API
+  useEffect(() => {
+    fetch("/api/games")
+      .then((res) => res.json())
+      .then((data) => {
+        setGames(data);
+        setFilteredGames(data);
+
+        // Extract unique genres and platforms
+        const uniqueGenres = [
+          "All Genres",
+          ...new Set(
+            data.flatMap((game) =>
+              (game.genre || "Undefined").split(",").map((g) => g.trim())
+            )
+          ),
+        ];
+
+        const uniquePlatforms = [
+          "All Platforms",
+          ...new Set(data.map((game) => game.platform || "Undefined")),
+        ];
+
+        setGenres(uniqueGenres);
+        setPlatforms(uniquePlatforms);
+      })
+      .catch((error) => console.error("Error fetching data: ", error));
+  }, []);
+
+  // Combined filtering logic
+  useEffect(() => {
+    let filtered = games;
+
+    // Filter by genre
+    if (selectedGenre !== "All Genres") {
+      filtered = filtered.filter((game) =>
+        (game.genre || "Undefined")
+          .split(",")
+          .map((g) => g.trim())
+          .includes(selectedGenre)
+      );
+    }
+
+    // Filter by platform
+    if (selectedPlatform !== "All Platforms") {
+      filtered = filtered.filter((game) => game.platform === selectedPlatform);
+    }
+
+    // Filter by search query
+    if (searchQuery) {
+      filtered = filtered.filter((game) =>
+        (game.title || "").toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+
+    // Apply sorting
+    if (sortOrder === "Sort by Score (Low to High)") {
+      filtered = [...filtered].sort((a, b) => a.score - b.score);
+    } else if (sortOrder === "Sort by Score (High to Low)") {
+      filtered = [...filtered].sort((a, b) => b.score - a.score);
+    }
+
+
+    setFilteredGames(filtered);
+  }, [games, selectedGenre, selectedPlatform, searchQuery, sortOrder]);
+
   return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              pages/index.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="flex flex-col">
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <SearchBar onSearch={setSearchQuery} />
+
+      <div className="flex flex-1">
+
+        <Sidebar genres={genres} onFilter={setSelectedGenre} />
+
+        <div className="w-5/6 ml-64 right-0 overflow-y-scroll bg-white px-4">
+                <div className="fixed w-5/6 right-0 bg-white z-20 px-4 h-28">
+                    <div className="flex justify-between">
+                      <Dropdown options={platforms} onSelect={setSelectedPlatform} label="Filter by Platform" />
+                      <Dropdown options={sortOptions} onSelect={setSortOrder} label="Sort by Score" />
+                    </div>
+                </div>
+
+
+        <div className="grid grid-cols-3 gap-4 p-4 pt-28">
+          {filteredGames.length > 0 ? (
+            filteredGames.map((game, index) => <GameCard key={index} game={game} />)
+          ) : (
+            <div className="col-span-3 text-center text-gray-500">No games available for the selected filters.</div>
+          )}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default Home;
